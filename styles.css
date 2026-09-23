@@ -1,0 +1,33 @@
+/* 汉搜 Zh Search — 搜索结果样式 */
+
+.zh-search-modal {
+  --zh-result-height: 22rem;
+}
+
+.zh-search-item {
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+}
+
+.zh-search-title {
+  font-weight: 600;
+  font-size: 0.95em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.zh-search-path {
+  font-size: 0.75em;
+  opacity: 0.55;
+  margin-top: 1px;
+}
+
+.zh-search-snippet {
+  font-size: 0.8em;
+  opacity: 0.75;
+  margin-top: 3px;
+  max-height: 2.6em;
+  overflow: hidden;
+  line-height: 1.3;
+}

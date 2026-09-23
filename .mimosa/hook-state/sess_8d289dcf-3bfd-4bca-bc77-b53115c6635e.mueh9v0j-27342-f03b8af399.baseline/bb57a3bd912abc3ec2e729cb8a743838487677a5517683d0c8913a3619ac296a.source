@@ -1,0 +1,52 @@
+import { App, PluginSettingTab, Setting } from "obsidian";
+import type ZhSearchPlugin from "./main";
+
+export class ZhSearchSettingTab extends PluginSettingTab {
+  plugin: ZhSearchPlugin;
+
+  constructor(app: App, plugin: ZhSearchPlugin) {
+    super(app, plugin);
+    this.plugin = plugin;
+  }
+
+  display(): void {
+    const { containerEl } = this;
+    containerEl.empty();
+    containerEl.createEl("h2", { text: "汉搜 Zh Search" });
+
+    new Setting(containerEl)
+      .setName("结果数量上限")
+      .setDesc("每次搜索最多返回的结果条数")
+      .addText((t) =>
+        t.setValue(String(this.plugin.settings.maxResults)).onChange(async (v) => {
+          const n = parseInt(v, 10);
+          if (!Number.isNaN(n) && n > 0 && n <= 100) {
+            this.plugin.settings.maxResults = n;
+            await this.plugin.saveSettings();
+          }
+        })
+      );
+
+    new Setting(containerEl)
+      .setName("排除目录")
+      .setDesc("逗号分隔，这些目录下的笔记不进索引（如：归档, 附件）")
+      .addText((t) =>
+        t.setValue(this.plugin.settings.excludeFolders.join(",")).onChange(async (v) => {
+          this.plugin.settings.excludeFolders = v
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean);
+          await this.plugin.saveSettings();
+        })
+      );
+
+    new Setting(containerEl)
+      .setName("重建索引")
+      .setDesc(`当前索引 ${this.plugin.index.docCount} 篇。修改排除目录后需重建。`)
+      .addButton((b) =>
+        b.setButtonText("重建").onClick(async () => {
+          await this.plugin.rebuildIndex(true);
+        })
+      );
+  }
+}

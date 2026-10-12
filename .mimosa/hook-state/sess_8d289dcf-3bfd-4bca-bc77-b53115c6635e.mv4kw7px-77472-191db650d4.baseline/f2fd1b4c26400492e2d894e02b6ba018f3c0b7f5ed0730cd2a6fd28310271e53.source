@@ -1,5 +1,5 @@
 import MiniSearch, { type SearchResult } from "minisearch";
-import { tokenizeJoined, tokenize } from "./segmenter";
+import { tokenizeJoined, tokenize } from "./segmenter.ts";
 
 export interface DocRecord {
   id: string;        // file.path
@@ -90,7 +90,7 @@ export class ZhSearchIndex {
     const trimmed = query.trim();
     if (!trimmed) return [];
     const joined = tokenizeJoined(trimmed);
-    const results: SearchResult[] = this.mini.search(joined, { limit });
+    const results: SearchResult[] = this.mini.search(joined).slice(0, limit);
     return results.map((r) => ({
       path: r.path as string,
       title: r.title as string,

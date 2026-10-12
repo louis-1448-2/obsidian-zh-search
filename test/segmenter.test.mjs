@@ -49,5 +49,20 @@ idx.remove("c/无关.md");
 const hits3 = idx.search("检索引擎");
 assert(hits3.length === 0, "删除后不再命中");
 
+console.log("[5] 拼音搜索（v0.2）");
+const idxP = new ZhSearchIndex();
+await idxP.buildAll([
+  { path: "a/我的笔记.md", title: "我的笔记", content: "笔记内容" },
+  { path: "b/项目管理.md", title: "项目管理", content: "项目内容" },
+]);
+const bj = idxP.search("bj");
+assert(bj.length >= 1 && bj.some(h => h.path === "a/我的笔记.md"), "首字母 bj 命中「我的笔记」");
+const biji = idxP.search("biji");
+assert(biji.length >= 1 && biji.some(h => h.path === "a/我的笔记.md"), "全拼连写 biji 命中");
+const xmgl = idxP.search("xmgl");
+assert(xmgl.length >= 1 && xmgl.some(h => h.path === "b/项目管理.md"), "首字母 xmgl 命中「项目管理」");
+const hanzi = idxP.search("笔记");
+assert(hanzi.length >= 1, "中文查询不受影响");
+
 console.log(failed === 0 ? "\n全部通过 ✓" : `\n${failed} 项失败 ✗`);
 process.exit(failed === 0 ? 0 : 1);

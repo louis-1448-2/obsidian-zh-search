@@ -1,11 +1,13 @@
 import MiniSearch, { type SearchResult } from "minisearch";
 import { tokenizeJoined, tokenize } from "./segmenter.ts";
+import { titlePinyin } from "./pinyin.ts";
 
 export interface DocRecord {
   id: string;        // file.path
   title: string;     // 文件名（不含扩展名）
   path: string;
   body: string;      // 分词后的正文（空格连接）
+  pinyin: string;    // 标题拼音索引（逐字全拼/全拼连写/首字母连写）
 }
 
 export interface Hit {
@@ -29,12 +31,12 @@ export class ZhSearchIndex {
 
   constructor() {
     this.mini = new MiniSearch({
-      fields: ["title", "body"],
+      fields: ["title", "body", "pinyin"],
       storeFields: ["title", "path"],
       searchOptions: {
         prefix: true,
         fuzzy: 0.2,
-        boost: { title: 4 },
+        boost: { title: 4, pinyin: 3 },
       },
     });
   }
@@ -106,6 +108,7 @@ export class ZhSearchIndex {
       title: tokenizeJoined(f.title),
       path: f.path,
       body: tokenizeJoined(f.content).slice(0, 200000), // 单文档索引上限，防超长文档
+      pinyin: titlePinyin(f.title),
     };
   }
 

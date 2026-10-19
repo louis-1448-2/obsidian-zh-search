@@ -23,7 +23,6 @@ export default class ZhSearchPlugin extends Plugin {
     this.addCommand({
       id: "search-notes",
       name: "全文搜索",
-      hotkeys: [{ modifiers: ["Mod", "Shift"], key: "k" }],
       callback: () => {
         new SearchModal(this.app, this).open();
       },
@@ -33,25 +32,25 @@ export default class ZhSearchPlugin extends Plugin {
 
     // 启动后后台建索引（等 workspace 就绪，避免拖慢启动）
     this.app.workspace.onLayoutReady(() => {
-      this.rebuildIndex(false);
+      void this.rebuildIndex(false);
     });
 
     // 文件事件增量维护（debounce 单独存成员，避免 on() 重载类型问题）
     const debouncedIndex = debounce((file: TFile) => this.indexFile(file), 800, true);
     this.registerEvent(
       this.app.vault.on("modify", (file: TAbstractFile) => {
-        if (file instanceof TFile) debouncedIndex(file);
+        if (file instanceof TFile) void debouncedIndex(file);
       })
     );
     this.registerEvent(
       this.app.vault.on("create", (file: TAbstractFile) => {
-        if (file instanceof TFile && file.extension === "md") this.indexFile(file);
+        if (file instanceof TFile && file.extension === "md") void this.indexFile(file);
       })
     );
     this.registerEvent(
       this.app.vault.on("rename", (file: TAbstractFile, oldPath: string) => {
         this.index.remove(oldPath);
-        if (file instanceof TFile && file.extension === "md") this.indexFile(file);
+        if (file instanceof TFile && file.extension === "md") void this.indexFile(file);
       })
     );
     this.registerEvent(

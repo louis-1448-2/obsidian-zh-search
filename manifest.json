@@ -1,7 +1,7 @@
 {
   "id": "zh-search",
   "name": "Zh Search",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "minAppVersion": "1.5.0",
   "description": "Search notes in Chinese with word segmentation and relevance ranking. 中文分词与相关度排序的全文搜索.",
   "author": "louis-1448-2",

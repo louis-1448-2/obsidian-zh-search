@@ -1,10 +1,10 @@
 {
   "id": "zh-search",
   "name": "Zh Search",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "minAppVersion": "1.5.0",
-  "description": "Chinese-first full-text search: word segmentation, relevance ranking, snippet preview. 汉搜——为中文而生的全文搜索。",
+  "description": "Search notes in Chinese with word segmentation and relevance ranking. 为中文优化的全文搜索。",
   "author": "louis-1448-2",
-  "authorUrl": "https://afdian.com/a/zhsearch",
+  "authorUrl": "https://github.com/louis-1448-2",
   "isDesktopOnly": false
 }

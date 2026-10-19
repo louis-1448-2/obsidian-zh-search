@@ -2094,8 +2094,8 @@ var ZhSearchPlugin = class extends import_obsidian3.Plugin {
   async onload() {
     await this.loadSettings();
     this.addCommand({
-      id: "open-zh-search",
-      name: "\u6C49\u641C\uFF1A\u5168\u6587\u641C\u7D22",
+      id: "search-notes",
+      name: "\u5168\u6587\u641C\u7D22",
       hotkeys: [{ modifiers: ["Mod", "Shift"], key: "k" }],
       callback: () => {
         new SearchModal(this.app, this).open();

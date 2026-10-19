@@ -21,8 +21,8 @@ export default class ZhSearchPlugin extends Plugin {
     await this.loadSettings();
 
     this.addCommand({
-      id: "open-zh-search",
-      name: "汉搜：全文搜索",
+      id: "search-notes",
+      name: "全文搜索",
       hotkeys: [{ modifiers: ["Mod", "Shift"], key: "k" }],
       callback: () => {
         new SearchModal(this.app, this).open();

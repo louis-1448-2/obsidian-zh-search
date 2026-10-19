@@ -1942,7 +1942,7 @@ var ZhSearchIndex = class {
         const batch = files.slice(i, i + BATCH).map((f) => this.toDoc(f));
         await this.mini.addAllAsync(batch, { chunkSize: 50 });
         onProgress?.(Math.min(i + BATCH, files.length), files.length);
-        await new Promise((r) => setTimeout(r, 0));
+        await new Promise((r) => globalThis.setTimeout(r, 0));
       }
       this.docCount = files.length;
     } finally {
@@ -2043,7 +2043,7 @@ var SearchModal = class extends import_obsidian.SuggestModal {
   onChooseSuggestion(hit) {
     const file = this.app.vault.getAbstractFileByPath(hit.path);
     if (file instanceof import_obsidian.TFile) {
-      this.app.workspace.getLeaf(false).openFile(file);
+      void this.app.workspace.getLeaf(false).openFile(file);
     }
   }
 };
@@ -2059,7 +2059,7 @@ var ZhSearchSettingTab = class extends import_obsidian2.PluginSettingTab {
   display() {
     const { containerEl } = this;
     containerEl.empty();
-    containerEl.createEl("h2", { text: "\u6C49\u641C Zh Search" });
+    new import_obsidian2.Setting(containerEl).setName("\u6C49\u641C Zh Search").setHeading();
     new import_obsidian2.Setting(containerEl).setName("\u7ED3\u679C\u6570\u91CF\u4E0A\u9650").setDesc("\u6BCF\u6B21\u641C\u7D22\u6700\u591A\u8FD4\u56DE\u7684\u7ED3\u679C\u6761\u6570").addText(
       (t) => t.setValue(String(this.plugin.settings.maxResults)).onChange(async (v) => {
         const n = parseInt(v, 10);
@@ -2096,30 +2096,29 @@ var ZhSearchPlugin = class extends import_obsidian3.Plugin {
     this.addCommand({
       id: "search-notes",
       name: "\u5168\u6587\u641C\u7D22",
-      hotkeys: [{ modifiers: ["Mod", "Shift"], key: "k" }],
       callback: () => {
         new SearchModal(this.app, this).open();
       }
     });
     this.addSettingTab(new ZhSearchSettingTab(this.app, this));
     this.app.workspace.onLayoutReady(() => {
-      this.rebuildIndex(false);
+      void this.rebuildIndex(false);
     });
     const debouncedIndex = (0, import_obsidian3.debounce)((file) => this.indexFile(file), 800, true);
     this.registerEvent(
       this.app.vault.on("modify", (file) => {
-        if (file instanceof import_obsidian3.TFile) debouncedIndex(file);
+        if (file instanceof import_obsidian3.TFile) void debouncedIndex(file);
       })
     );
     this.registerEvent(
       this.app.vault.on("create", (file) => {
-        if (file instanceof import_obsidian3.TFile && file.extension === "md") this.indexFile(file);
+        if (file instanceof import_obsidian3.TFile && file.extension === "md") void this.indexFile(file);
       })
     );
     this.registerEvent(
       this.app.vault.on("rename", (file, oldPath) => {
         this.index.remove(oldPath);
-        if (file instanceof import_obsidian3.TFile && file.extension === "md") this.indexFile(file);
+        if (file instanceof import_obsidian3.TFile && file.extension === "md") void this.indexFile(file);
       })
     );
     this.registerEvent(

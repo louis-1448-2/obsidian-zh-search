@@ -36,7 +36,7 @@ export class SearchModal extends SuggestModal<Hit> {
   onChooseSuggestion(hit: Hit): void {
     const file = this.app.vault.getAbstractFileByPath(hit.path);
     if (file instanceof TFile) {
-      this.app.workspace.getLeaf(false).openFile(file);
+      void this.app.workspace.getLeaf(false).openFile(file);
     }
   }
 }

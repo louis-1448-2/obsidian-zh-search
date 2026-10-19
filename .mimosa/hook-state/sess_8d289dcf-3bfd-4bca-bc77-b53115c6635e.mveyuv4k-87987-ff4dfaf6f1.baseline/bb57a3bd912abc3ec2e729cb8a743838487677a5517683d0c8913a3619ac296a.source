@@ -12,7 +12,7 @@ export class ZhSearchSettingTab extends PluginSettingTab {
   display(): void {
     const { containerEl } = this;
     containerEl.empty();
-    containerEl.createEl("h2", { text: "汉搜 Zh Search" });
+    new Setting(containerEl).setName("汉搜 Zh Search").setHeading();
 
     new Setting(containerEl)
       .setName("结果数量上限")

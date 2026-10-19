@@ -1,17 +1,12 @@
 {
   "schema_version": "mimosa-task-review/v2",
-  "run_id": "20261019T073430494Z-84549-6c3965e40b32",
+  "run_id": "20261019T080027033Z-87829-3fd4cca97059",
   "run_status": "inconclusive",
   "errors": [
     {
-      "stage": "bash-discovery",
-      "target": ".",
-      "reason": "bash_discovery_incomplete: task baseline unavailable"
-    },
-    {
-      "stage": "baseline",
-      "target": ".",
-      "reason": "baseline_missing: task baseline is unavailable"
+      "stage": "candidate-select",
+      "target": ".github/workflows/release.yml",
+      "reason": "changed_file_unreadable: observed changed file no longer exists or cannot be read"
     }
   ],
   "coverage": {
@@ -19,36 +14,36 @@
     "status": "partial",
     "scope": "hook_observed_diff",
     "baseline": {
-      "complete": false,
-      "captured_files": 0,
-      "candidate_limit": 20,
+      "complete": true,
+      "captured_files": 9,
+      "candidate_limit": 5000,
       "truncated": false,
       "enumeration_error_count": 0,
       "snapshot_error_count": 0,
-      "compensated_target_count": 0
+      "compensated_target_count": 7
     },
     "change_tracking": {
-      "touched_observed": 0,
-      "touched_retained": 0,
+      "touched_observed": 5,
+      "touched_retained": 5,
       "truncated": false,
       "bash_mutation": true,
-      "bash_discovered": 0,
+      "bash_discovered": 7,
       "bash_discovery_limit": 80,
       "bash_discovery_truncated": false
     },
     "candidates": {
-      "eligible_files": 0,
-      "selected_files": 0,
+      "eligible_files": 7,
+      "selected_files": 7,
       "limit": 20,
       "truncated": false
     },
     "scanning": {
-      "required_files": 0,
-      "scanned_files": 0,
+      "required_files": 5,
+      "scanned_files": 5,
       "skipped_files": 0,
       "failed_files": 0,
-      "project_checks_required": 0,
-      "project_checks_completed": 0
+      "project_checks_required": 1,
+      "project_checks_completed": 1
     },
     "notification": {
       "eligible_findings": 0,
@@ -57,57 +52,145 @@
       "truncated": false
     },
     "reason_counts": {
-      "bash_discovery_incomplete": 1,
-      "baseline_missing": 1,
-      "project_check_failed": 2
+      "changed_file_unreadable": 1,
+      "project_check_failed": 1
     },
     "reasons": [
       {
-        "code": "bash_discovery_incomplete",
-        "stage": "bash-discovery",
-        "target": ".",
-        "detail": "task baseline unavailable",
-        "affects_completion": true
-      },
-      {
-        "code": "baseline_missing",
-        "stage": "baseline",
-        "target": ".",
-        "detail": "task baseline is unavailable",
+        "code": "changed_file_unreadable",
+        "stage": "candidate-select",
+        "target": ".github/workflows/release.yml",
+        "detail": "observed changed file no longer exists or cannot be read",
         "affects_completion": true
       },
       {
         "code": "project_check_failed",
-        "stage": "bash-discovery",
-        "target": ".",
-        "detail": "bash_discovery_incomplete: task baseline unavailable",
-        "affects_completion": true
-      },
-      {
-        "code": "project_check_failed",
-        "stage": "baseline",
-        "target": ".",
-        "detail": "baseline_missing: task baseline is unavailable",
+        "stage": "candidate-select",
+        "target": ".github/workflows/release.yml",
+        "detail": "changed_file_unreadable: observed changed file no longer exists or cannot be read",
         "affects_completion": true
       }
     ],
     "reasons_truncated": false
   },
-  "generated_at": "2026-10-19T07:34:30.494Z",
+  "generated_at": "2026-10-19T08:00:27.033Z",
   "session_id": "sess_8d289dcf-3bfd-4bca-bc77-b53115c6635e",
   "target": ".",
-  "revision": "89688a67e9c79bfcb0d2b7c1664df45f2f019e07",
+  "revision": "b7b805174d2f883b681fae34a0fb7dc6509021da",
   "rules_version": "unavailable",
-  "diff_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "diff_hash": "e76d932c5784455f04757d156c8ea82df1c9ad6d932d0c57bd1febe633faa202",
   "diff": {
     "algorithm": "sha256",
-    "changed_file_count": 0,
-    "changed_files": []
+    "changed_file_count": 6,
+    "changed_files": [
+      {
+        "file": "main.js",
+        "ranges": [
+          {
+            "start": 1945,
+            "end": 1945
+          },
+          {
+            "start": 2046,
+            "end": 2046
+          },
+          {
+            "start": 2062,
+            "end": 2062
+          },
+          {
+            "start": 2105,
+            "end": 2105
+          },
+          {
+            "start": 2110,
+            "end": 2110
+          },
+          {
+            "start": 2115,
+            "end": 2115
+          },
+          {
+            "start": 2121,
+            "end": 2121
+          }
+        ],
+        "before_hash": "1a5ac5a0d5e3ec186d24785d9bf424583a188f96206bb3aedee8bc5d0fe9421c",
+        "after_hash": "8c9738f8b616fa9399db58af70df9e2b1c9fe3337f884c215c020460cb554370"
+      },
+      {
+        "file": "package-lock.json",
+        "ranges": [
+          {
+            "start": 16,
+            "end": 513
+          }
+        ],
+        "before_hash": "66e08330355c9b21c17ce761d8e8a3d6a8a54e9afb8ab00b470ffe00b31837bf",
+        "after_hash": "9f788b6a6342f48175b1842678ec6968a69901823176df5dc6deb6e6355f0206"
+      },
+      {
+        "file": "src/indexer.ts",
+        "ranges": [
+          {
+            "start": 56,
+            "end": 57
+          }
+        ],
+        "before_hash": "5823aae9a2c72509e6df2bddb0c18c474e9c0a1c50d8ca1d5622b361a701ce55",
+        "after_hash": "5ee3af8dbfed65d375597bf13270aeb6019d6192bd71e60076b4c2e8e58bdd46"
+      },
+      {
+        "file": "src/main.ts",
+        "ranges": [
+          {
+            "start": 35,
+            "end": 35
+          },
+          {
+            "start": 42,
+            "end": 42
+          },
+          {
+            "start": 47,
+            "end": 47
+          },
+          {
+            "start": 53,
+            "end": 53
+          }
+        ],
+        "before_hash": "88aaf1e1d17dee47b43e4e3e9d5b0c1ecfa0157b38bb20439ad14053202117bd",
+        "after_hash": "9d5745e627f41032777bfb810a4a8cbd7e02d189280e3635dbb17171bde26461"
+      },
+      {
+        "file": "src/modal.ts",
+        "ranges": [
+          {
+            "start": 39,
+            "end": 39
+          }
+        ],
+        "before_hash": "fc4e3c9b8337031adf3761b1b4562c230dd311b8eda00ec1ffa61fe12412ef28",
+        "after_hash": "dde782a61a365faab9beb667c30bf613e13b34dc03bee816a21aed3f557b8d9e"
+      },
+      {
+        "file": "src/settings.ts",
+        "ranges": [
+          {
+            "start": 15,
+            "end": 15
+          }
+        ],
+        "before_hash": "d0776b3cc5a0fdb78924d33d916b44b63ed8b3864dfbdbfc74e55acf40ff3b14",
+        "after_hash": "c24b017b1c5e76e195eb0edfedc00a246d5e47265f435849344185492e7f47d5"
+      }
+    ]
   },
   "timing": {
-    "started_at": "2026-10-19T07:34:30.163Z",
-    "completed_at": "2026-10-19T07:34:30.494Z",
-    "duration_ms": 331,
+    "started_at": "2026-10-19T08:00:25.993Z",
+    "completed_at": "2026-10-19T08:00:27.033Z",
+    "duration_ms": 1040,
     "measurement": "hook_wall_clock"
   },
   "tokens": {
@@ -122,10 +205,10 @@
     "profile": "gate",
     "operation": "Stop",
     "outcome": "partial/INCONCLUSIVE",
-    "latencyMs": 331,
-    "peakMemoryBytes": 113328128,
+    "latencyMs": 1040,
+    "peakMemoryBytes": 221921280,
     "memoryMeasurement": "max-observed-process-rss",
-    "scannedFiles": 0,
+    "scannedFiles": 5,
     "cache": {
       "hits": 0,
       "misses": 0,
@@ -150,8 +233,8 @@
   "finding_events": [],
   "findings": [],
   "artifacts": {
-    "immutable_report": ".mimosa/reports/task-review-sess_8d289dcf-3bfd-4bca-bc77-b53115c6635e-20261019T073430494Z-84549-6c3965e40b32.json",
+    "immutable_report": ".mimosa/reports/task-review-sess_8d289dcf-3bfd-4bca-bc77-b53115c6635e-20261019T080027033Z-87829-3fd4cca97059.json",
     "latest_report": ".mimosa/reports/task-review-sess_8d289dcf-3bfd-4bca-bc77-b53115c6635e.json",
-    "history_summary": ".mimosa/history/run-20261019T073430494Z-84549-6c3965e40b32.json"
+    "history_summary": ".mimosa/history/run-20261019T080027033Z-87829-3fd4cca97059.json"
   }
 }

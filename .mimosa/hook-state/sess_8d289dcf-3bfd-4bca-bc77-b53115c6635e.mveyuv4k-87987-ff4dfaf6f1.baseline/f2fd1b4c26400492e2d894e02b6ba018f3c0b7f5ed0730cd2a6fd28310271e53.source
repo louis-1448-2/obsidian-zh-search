@@ -53,8 +53,8 @@ export class ZhSearchIndex {
         const batch = files.slice(i, i + BATCH).map((f) => this.toDoc(f));
         await this.mini.addAllAsync(batch, { chunkSize: 50 });
         onProgress?.(Math.min(i + BATCH, files.length), files.length);
-        // 让出主线程，避免大库卡 UI
-        await new Promise((r) => setTimeout(r, 0));
+        // 让出主线程，避免大库卡 UI（globalThis 在浏览器等价 window，且兼容测试环境）
+        await new Promise((r) => globalThis.setTimeout(r, 0));
       }
       this.docCount = files.length;
     } finally {

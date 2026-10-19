@@ -2059,7 +2059,6 @@ var ZhSearchSettingTab = class extends import_obsidian2.PluginSettingTab {
   display() {
     const { containerEl } = this;
     containerEl.empty();
-    new import_obsidian2.Setting(containerEl).setName("\u6C49\u641C Zh Search").setHeading();
     new import_obsidian2.Setting(containerEl).setName("\u7ED3\u679C\u6570\u91CF\u4E0A\u9650").setDesc("\u6BCF\u6B21\u641C\u7D22\u6700\u591A\u8FD4\u56DE\u7684\u7ED3\u679C\u6761\u6570").addText(
       (t) => t.setValue(String(this.plugin.settings.maxResults)).onChange(async (v) => {
         const n = parseInt(v, 10);
